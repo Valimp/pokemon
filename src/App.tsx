@@ -1,8 +1,11 @@
+import { Route, Routes } from "react-router-dom"
+import Characters from "./pages/Characters"
+
 function App() {
   return (
-    <>
-      <h1>Pokemon</h1>
-    </>
+    <Routes>
+      <Route path="/Characters" element = {<Characters/>}/>
+    </Routes>
   )
 }
 
