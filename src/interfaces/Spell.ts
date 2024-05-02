@@ -1,6 +1,8 @@
+import { CharacterInterface } from "./Character"
+
 export interface Spell {
-    name :string,
-    damage : number,
-    cost : number,
-    image : string
+    name: string,
+    damage: number,
+    cost: number,
+    image: string
 }
