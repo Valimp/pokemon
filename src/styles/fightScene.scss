@@ -1,26 +1,135 @@
-
 .fightScene{
+    top:40%;
+    left:50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
     align-items: center;
-    display: flex;
+    display: ruby;
     justify-content: center;
+    width: 60vw;
+    .titre{
+        left:50%;
+        top:-1500%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+
     .content{
         display: flex;
-        border: 1px solid;
-        width: 80%;
+        width: 100%;
+        border-radius: 10px;
+
+        .button-spell{
+            background: #007fe0;
+            border: 1px solid #007fe0;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+        }
+        
+        .button-spell:hover,
+        .button-spell:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #007fe0;
+        }
+        
+        .button-spell:active {
+            opacity: .5;
+        }
+
+        .button-spell:disabled,
+        .button-spell[disabled]{
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+        }
+
+        .button-skip {
+            background: #FF4742;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+        }
+        
+        .button-skip:hover,
+        .button-skip:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #FF4742;
+        }
+        
+        .button-skip:active {
+            opacity: .5;
+        }
+
+        .button-skip:disabled,
+        .button-skip[disabled]{
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+        }
+
+        .info{
+            font-size: 1.3em;
+        }
+
         .perso1{
-            width: 50%;
+            position: absolute;
+            left:10%;
+            transform: translate(-50%, -50%);
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            padding: 1em;
         }
         .perso2{
-            width: 50%;
+            position: absolute;
+            left:90%;
+            transform: translate(-50%, -50%);
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-left: solid;
+            padding: 1em;
         }
     }
 }

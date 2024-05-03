@@ -1,7 +1,5 @@
 import { CharacterInterface } from "../interfaces/Character"
 import { Spell } from "../interfaces/Spell"
-import imgCharacter from '../assets/characters/perso.jpg'
-import imgCharacter2 from '../assets/characters/letamaca-pose-monsieur-epee.jpg'
 import '../styles/fightScene.scss'
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
@@ -147,16 +145,17 @@ const FightScene = () => {
 
     return (
         <div className="fightScene">
+            <h1 className="titre">FIGHT !</h1>
             <div className="content">
                 <div className="perso1">
-                    <span>{character1.name}</span>
-                    <img width={"10%"} src={imgCharacter} alt="" />
-                    <span> hp: {character1.hp} &nbsp; defense: {character1.defense} PM: {character1.mp} </span>
+                    <span className="info">{character1.name}</span>
+                    <img width={"200px"} src={character1.image} alt="" />
+                    <span className="info"> hp: {character1.hp} &nbsp; defense: {character1.defense} PM: {character1.mp} </span>
                     <div className="content-spell">
                         {character1.spells.map((spell) => {
                             return (
                                 <>
-                                    <button id={`spell-${character1.name}-${spell.name}`} className="button-spell-character1" disabled={disabled1} onClick={() => {
+                                    <button className="button-spell-character1 button-spell" disabled={disabled1} onClick={() => {
                                         spellEffect(spell, character1)
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
@@ -167,27 +166,23 @@ const FightScene = () => {
                                             hp: prevStat.hp - reduceDamage(spell.damage, character2.defense)
 
                                         }))
-
-
                                     }}  >{spell.name}</button>
                                 </>
                             )
                         })}
-                        <button disabled={disabled1} onClick={() => skip(character2)}>Skip</button>
+                        <button className="button-skip" disabled={disabled1} onClick={() => skip(character2)}>Skip</button>
                     </div>
-
-
                 </div>
 
                 <div className="perso2">
-                    <span>{character2.name}</span>
-                    <img width={"10%"} src={imgCharacter2} alt="" />
-                    <span> hp: {character2.hp} &nbsp; defense: {character2.defense} PM: {character2.mp}</span>
+                    <span className="info">{character2.name}</span>
+                    <img width={"200px"} src={character2.image} alt="" />
+                    <span className="info"> hp: {character2.hp} &nbsp; defense: {character2.defense} PM: {character2.mp}</span>
                     <div className="content-spell">
                         {character2.spells.map((spell) => {
                             return (
                                 <>
-                                    <button className="button-spell-character2" id={`spell-${character2.name}-${spell.name}`} disabled={disabled2} onClick={() => {
+                                    <button className="button-spell-character2 button-spell" id={`spell-${character2.name}-${spell.name}`} disabled={disabled2} onClick={() => {
                                         spellEffect(spell, character2)
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
@@ -202,10 +197,11 @@ const FightScene = () => {
                                 </>
                             )
                         })}
-                        <button disabled={disabled2} onClick={() => skip(character1)}>Skip</button>
+                        <button className="button-skip" disabled={disabled2} onClick={() => skip(character1)}>Skip</button>
                     </div>
                 </div>
             </div>
+
             {!victory1 && <p className="msg-victory1">Victoire de {character1.name}</p>}
             {!victory2 && <p className="msg-victory1">Victoire de {character2.name}</p>}
         </div>
