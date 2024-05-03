@@ -9,7 +9,7 @@ interface StartFightButtonProps {
 const StartFightButton = ({ player1, player2, map }: StartFightButtonProps) => {
 
     return (
-        <Link to={`/FightScene/${player1}/${player2}/${map}`} >
+        <Link to={`/FightScene/${player1}/${player2}/${encodeURIComponent(map)}`} >
             Start Fight
         </Link>
     )
