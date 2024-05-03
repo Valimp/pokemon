@@ -2,6 +2,7 @@ import CharactersButton from "../components/CharactersButton"
 import { useState } from "react"
 import Pickachu from "../assets/sprites/pikachu.png"
 import '../styles/components/App.scss'
+import StartFightButton from "../components/StartFightButton"
 
 const Home = () => {
 
@@ -36,6 +37,10 @@ const Home = () => {
                 player="2"
             />
         </div>
+        <div>
+            Vous avez choisi {initCombat.joueur1} contre {initCombat.joueur2}
+        </div>
+        <StartFightButton player1={initCombat.joueur1} player2={initCombat.joueur2} />
     </div>
   )
 }
