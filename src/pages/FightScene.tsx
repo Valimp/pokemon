@@ -211,8 +211,8 @@ const FightScene = () => {
                 </div>
             </div>
 
-            {!victory1 && <p className="msg-victory1">Victoire de {character1.name}</p>}
-            {!victory2 && <p className="msg-victory1">Victoire de {character2.name}</p>}
+            {!victory1 && <p className="msg-victory">Victoire de {character1.name}</p>}
+            {!victory2 && <p className="msg-victory">Victoire de {character2.name}</p>}
         </div >
 
     )
