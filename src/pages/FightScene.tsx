@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom"
 import { characters } from "../data/characters"
 
 const FightScene = () => {
-    
+
     const { player1, player2, map } = useParams()
     let decodeUri
     if (map) {
@@ -119,7 +119,7 @@ const FightScene = () => {
         }
         character1.spells.map((spell) => {
             if (spell.cost > character1.mp) {
-                const button = document.querySelector<HTMLButtonElement>(`#spell-${character1.name}-${spell.name}`)
+                const button = document.querySelector<HTMLButtonElement>(`#spell-${character1.name}-${spell.name.replace('/ /g', '_')}`)
                 if (button) {
                     button.disabled = true
                 }
@@ -127,7 +127,7 @@ const FightScene = () => {
         })
         character2.spells.map((spell) => {
             if (spell.cost > character2.mp) {
-                const button = document.querySelector<HTMLButtonElement>(`#spell-${character2.name}-${spell.name}`)
+                const button = document.querySelector<HTMLButtonElement>(`#spell-${character2.name}-${spell.name.replace('/ /g', '_')}`)
                 if (button) {
                     button.disabled = true
                 }
@@ -162,7 +162,7 @@ const FightScene = () => {
                         {character1.spells.map((spell) => {
                             return (
                                 <>
-                                    <button className="button-spell-character1 button-spell" disabled={disabled1} onClick={() => {
+                                    <button className="button-spell-character1 button-spell" id={`spell-${character1.name}-${spell.name.replace('/ /g', '_')}`} disabled={disabled1} onClick={() => {
                                         spellEffect(spell, character1)
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
@@ -189,7 +189,7 @@ const FightScene = () => {
                         {character2.spells.map((spell) => {
                             return (
                                 <>
-                                    <button className="button-spell-character2 button-spell" id={`spell-${character2.name}-${spell.name}`} disabled={disabled2} onClick={() => {
+                                    <button className="button-spell-character2 button-spell" id={`spell-${character2.name}-${spell.name.replace('/ /g', '_')}`} disabled={disabled2} onClick={() => {
                                         spellEffect(spell, character2)
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
