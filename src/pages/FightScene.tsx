@@ -119,7 +119,8 @@ const FightScene = () => {
         }
         character1.spells.map((spell) => {
             if (spell.cost > character1.mp) {
-                const button = document.querySelector<HTMLButtonElement>(`#spell-${character1.name}-${spell.name.replace('/ /g', '_')}`)
+                const button = document.querySelector<HTMLButtonElement>(`#spell-${character1.name}-${spell.name.replace(/\s/g, '_')}`)
+                console.log(button)
                 if (button) {
                     button.disabled = true
                 }
@@ -127,7 +128,8 @@ const FightScene = () => {
         })
         character2.spells.map((spell) => {
             if (spell.cost > character2.mp) {
-                const button = document.querySelector<HTMLButtonElement>(`#spell-${character2.name}-${spell.name.replace('/ /g', '_')}`)
+                const button = document.querySelector<HTMLButtonElement>(`#spell-${character2.name}-${spell.name.replace(/\s/g, '_')}`)
+                console.log(button)
                 if (button) {
                     button.disabled = true
                 }
@@ -162,7 +164,7 @@ const FightScene = () => {
                         {character1.spells.map((spell) => {
                             return (
                                 <>
-                                    <button className="button-spell-character1 button-spell" id={`spell-${character1.name}-${spell.name.replace('/ /g', '_')}`} disabled={disabled1} onClick={() => {
+                                    <button className="button-spell-character1 button-spell" id={`spell-${character1.name}-${spell.name.replace(/\s/g, '_')}`} disabled={disabled1} onClick={() => {
                                         spellEffect(spell, character1)
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
@@ -173,7 +175,7 @@ const FightScene = () => {
                                             hp: prevStat.hp - reduceDamage(spell.damage, character2.defense)
 
                                         }))
-                                    }}  >{spell.name}</button>
+                                    }}  >{spell.name}</button >
                                 </>
                             )
                         })}
@@ -189,7 +191,7 @@ const FightScene = () => {
                         {character2.spells.map((spell) => {
                             return (
                                 <>
-                                    <button className="button-spell-character2 button-spell" id={`spell-${character2.name}-${spell.name.replace('/ /g', '_')}`} disabled={disabled2} onClick={() => {
+                                    <button className="button-spell-character2 button-spell" id={`spell-${character2.name}-${spell.name.replace(/\s/g, '_')}`} disabled={disabled2} onClick={() => {
                                         spellEffect(spell, character2)
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
@@ -211,7 +213,7 @@ const FightScene = () => {
 
             {!victory1 && <p className="msg-victory1">Victoire de {character1.name}</p>}
             {!victory2 && <p className="msg-victory1">Victoire de {character2.name}</p>}
-        </div>
+        </div >
 
     )
 }
