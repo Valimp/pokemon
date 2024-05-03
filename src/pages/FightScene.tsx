@@ -5,64 +5,23 @@ import imgCharacter from '../assets/characters/perso.jpg'
 import imgCharacter2 from '../assets/characters/letamaca-pose-monsieur-epee.jpg'
 import '../styles/fightScene.scss'
 import { useEffect, useState } from "react"
-
-
-
-const FightScene = () => {
-
-    const charge: Spell = {
-        name: "charge",
-        damage: 15,
-        cost: 9,
-        image: "youtube.com"
-    }
-
-    const heal: Spell = {
-        name: 'heal',
-        damage: 0,
-        cost: 2,
-        image: "dddd",
-        spellEffect: (character: CharacterInterface): void => {
-            character.hp = character.hp + 10
-        }
-    }
-
-    const coupe: Spell = {
-        name: "coupe",
-        damage: 20,
-        cost: 2,
-        image: "youtube.com"
-    }
-
-    const pouis: CharacterInterface = {
-        name: "Pouis",
-        hp: 125,
-        mp: 5,
-        image: "youtube.com",
-        attack: 50,
-        defense: 20,
-        spells: [charge, coupe, heal]
-    }
-
-    const peonard: CharacterInterface = {
-        name: "Péonard",
-        hp: 150,
-        mp: 6,
-        image: "youtube.com",
-        attack: 100,
-        defense: 10,
-        spells: [charge, coupe, heal]
-    }
-
+import { useParams } from "react-router-dom"
+import { characters } from "../data/characters"
 
 const FightScene = () => {
+
+    const { player1, player2 } = useParams()
+    const findPlayer1: CharacterInterface = characters.find((element) => element.name == player1)!
+    const findPLayer2: CharacterInterface = characters.find((element) => element.name == player2)!
+
+    const [victory1, setVictory1] = useState(true);
+    const [victory2, setVictory2] = useState(true);
+
     const recoveryPm = 4
 
 
-    const [character1, setCharacter1] = useState<CharacterInterface>(peonard)
-    const [character2, setCharacter2] = useState<CharacterInterface>(pouis)
-    const [disabledSpell1, setDisabledSpell1] = useState(false)
-    const [disabledSpell2, setDisabledSpell2] = useState(false)
+    const [character1, setCharacter1] = useState<CharacterInterface>(findPlayer1)
+    const [character2, setCharacter2] = useState<CharacterInterface>(findPLayer2)
     const [disabled1, setDisabled1] = useState(false)
     const [disabled2, setDisabled2] = useState(false)
 
@@ -79,32 +38,34 @@ const FightScene = () => {
                 playerActuallyPlayed: character1
             }))
             setDisabled2(true)
-            setDisabledSpell2(true)
         } else {
             setRound(prevRound => ({
                 ...prevRound,
                 playerActuallyPlayed: character2
             }))
             setDisabled1(true)
-            setDisabledSpell1(true)
         }
     }, [])
 
-    useEffect(() => {
-        console.log(round)
-    }, [round])
+
+
 
     useEffect(() => {
         if (character1.hp <= 0) {
-            console.log("coucou");
-            
+            setVictory2(false);
+            setDisabled1(true)
+            setDisabled2(true)
+        } if (character2.hp <= 0) {
+            setVictory1(false);
+            setDisabled1(true)
+            setDisabled2(true)
         }
-    })
+        console.log(round)
+    }, [round, character1.hp, character2.hp])
+
 
     const skip = (nextPlayer: CharacterInterface): void => {
         if (nextPlayer === character1) {
-            setDisabledSpell1(false)
-            setDisabledSpell2(true)
             setDisabled1(false)
             setDisabled2(true)
             setCharacter1(prevStat => ({
@@ -112,8 +73,6 @@ const FightScene = () => {
                 mp: prevStat.mp + recoveryPm
             }))
         } else {
-            setDisabledSpell1(true)
-            setDisabledSpell2(false)
             setDisabled1(true)
             setDisabled2(false)
             setCharacter2(prevStat => ({
@@ -190,9 +149,6 @@ const FightScene = () => {
         <div className="fightScene">
             <div className="content">
                 <div className="perso1">
-
-                    <span> hp: {character1.hp} &nbsp; defense: {character1.defense} PM: {character1.mp} Attack: {character1.attack}  </span>
-                    <img width={"10%"} src={imgCharacter} alt="" />
                     <span>{character1.name}</span>
                     <img width={"10%"} src={imgCharacter} alt="" />
                     <span> hp: {character1.hp} &nbsp; defense: {character1.defense} PM: {character1.mp} </span>
@@ -224,8 +180,6 @@ const FightScene = () => {
                 </div>
 
                 <div className="perso2">
-                    <span> hp: {character2.hp} &nbsp; defense: {character2.defense} PM: {character2.mp} Attack: {character2.attack}</span>
-                    <img width={"10%"} src={imgCharacter2} alt="" />
                     <span>{character2.name}</span>
                     <img width={"10%"} src={imgCharacter2} alt="" />
                     <span> hp: {character2.hp} &nbsp; defense: {character2.defense} PM: {character2.mp}</span>
@@ -252,10 +206,11 @@ const FightScene = () => {
                     </div>
                 </div>
             </div>
+            {!victory1 && <p className="msg-victory1">Victoire de {character1.name}</p>}
+            {!victory2 && <p className="msg-victory1">Victoire de {character2.name}</p>}
         </div>
 
     )
 }
-
 
 export default FightScene
