@@ -1,4 +1,3 @@
-import { Passive } from "./Passive";
 import { Spell } from "./Spell";
 
 export interface CharacterInterface {
@@ -8,6 +7,5 @@ export interface CharacterInterface {
     image: string,
     attack: number,
     defense: number,
-    passif: Passive,
     spells: Array<Spell>
 }

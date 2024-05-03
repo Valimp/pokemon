@@ -5,7 +5,7 @@ import { Spell } from "../interfaces/Spell"
 const Character = (props: CharacterInterface) => {
     return (
         <div className="pers">
-            <p> name: <span> { props.name } </span></p>
+            <p> name: <span> {props.name} </span></p>
             <div>  <img src={props.image} /> </div>
 
             <span> Stats  </span>
@@ -13,13 +13,12 @@ const Character = (props: CharacterInterface) => {
             <ul>
                 <li> Vie: {props.hp}</li>
                 <li> PM: {props.mp}</li>
-                <li> Attack: { props.attack }</li>
-                <li> Defense: { props.defense }</li>
-                <li> passif:  { props.passif.name }</li>
-                
+                <li> Attack: {props.attack}</li>
+                <li> Defense: {props.defense}</li>
+
                 Liste de spell:
-                { props.spells.map((spell: Spell) => {
-                    return(
+                {props.spells.map((spell: Spell) => {
+                    return (
                         <>
                             <li>Name {spell.name} </li>
                             <li> {spell.image} </li>
@@ -28,7 +27,7 @@ const Character = (props: CharacterInterface) => {
 
                         </>
                     )
-                }) }
+                })}
             </ul>
 
 

@@ -5,4 +5,5 @@ export interface Spell {
     damage: number,
     cost: number,
     image: string
+    spellEffect?: (character: CharacterInterface) => void
 }

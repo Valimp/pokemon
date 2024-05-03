@@ -1,0 +1,14 @@
+.characterCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
+
+    .characterCard__image img {
+        width: 100px;
+        height: 100px;
+    }
+}
