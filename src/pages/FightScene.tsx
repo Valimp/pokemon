@@ -6,9 +6,12 @@ import { useParams } from "react-router-dom"
 import { characters } from "../data/characters"
 
 const FightScene = () => {
-
+    
     const { player1, player2, map } = useParams()
-    console.log(map)
+    let decodeUri
+    if (map) {
+        decodeUri = decodeURIComponent(map)
+    }
     const findPlayer1: CharacterInterface = characters.find((element) => element.name == player1)!
     const findPLayer2: CharacterInterface = characters.find((element) => element.name == player2)!
 
@@ -22,6 +25,10 @@ const FightScene = () => {
     const [character2, setCharacter2] = useState<CharacterInterface>(findPLayer2)
     const [disabled1, setDisabled1] = useState(false)
     const [disabled2, setDisabled2] = useState(false)
+
+    const divStyle = {
+        backgroundImage: `url(${decodeUri})`,
+    };
 
     const [round, setRound] = useState({
         historyRound: [],
@@ -144,7 +151,7 @@ const FightScene = () => {
     }
 
     return (
-        <div className="fightScene">
+        <div style={divStyle} className="fightScene">
             <h1 className="titre">FIGHT !</h1>
             <div className="content">
                 <div className="perso1">
