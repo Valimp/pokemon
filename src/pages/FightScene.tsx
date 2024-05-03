@@ -1,4 +1,3 @@
-import { FightSceneInterface } from "../interfaces/FightScene"
 import { CharacterInterface } from "../interfaces/Character"
 import { Passive } from "../interfaces/Passive"
 import { Spell } from "../interfaces/Spell"
@@ -55,10 +54,15 @@ const FightScene = () => {
         spells: [charge, coupe, heal]
     }
 
+
+const FightScene = () => {
     const recoveryPm = 4
+
 
     const [character1, setCharacter1] = useState<CharacterInterface>(peonard)
     const [character2, setCharacter2] = useState<CharacterInterface>(pouis)
+    const [disabledSpell1, setDisabledSpell1] = useState(false)
+    const [disabledSpell2, setDisabledSpell2] = useState(false)
     const [disabled1, setDisabled1] = useState(false)
     const [disabled2, setDisabled2] = useState(false)
 
@@ -75,12 +79,14 @@ const FightScene = () => {
                 playerActuallyPlayed: character1
             }))
             setDisabled2(true)
+            setDisabledSpell2(true)
         } else {
             setRound(prevRound => ({
                 ...prevRound,
                 playerActuallyPlayed: character2
             }))
             setDisabled1(true)
+            setDisabledSpell1(true)
         }
     }, [])
 
@@ -88,8 +94,17 @@ const FightScene = () => {
         console.log(round)
     }, [round])
 
+    useEffect(() => {
+        if (character1.hp <= 0) {
+            console.log("coucou");
+            
+        }
+    })
+
     const skip = (nextPlayer: CharacterInterface): void => {
         if (nextPlayer === character1) {
+            setDisabledSpell1(false)
+            setDisabledSpell2(true)
             setDisabled1(false)
             setDisabled2(true)
             setCharacter1(prevStat => ({
@@ -97,6 +112,8 @@ const FightScene = () => {
                 mp: prevStat.mp + recoveryPm
             }))
         } else {
+            setDisabledSpell1(true)
+            setDisabledSpell2(false)
             setDisabled1(true)
             setDisabled2(false)
             setCharacter2(prevStat => ({
@@ -173,9 +190,12 @@ const FightScene = () => {
         <div className="fightScene">
             <div className="content">
                 <div className="perso1">
+
                     <span> hp: {character1.hp} &nbsp; defense: {character1.defense} PM: {character1.mp} Attack: {character1.attack}  </span>
                     <img width={"10%"} src={imgCharacter} alt="" />
                     <span>{character1.name}</span>
+                    <img width={"10%"} src={imgCharacter} alt="" />
+                    <span> hp: {character1.hp} &nbsp; defense: {character1.defense} PM: {character1.mp} </span>
                     <div className="content-spell">
                         {character1.spells.map((spell) => {
                             return (
@@ -207,6 +227,8 @@ const FightScene = () => {
                     <span> hp: {character2.hp} &nbsp; defense: {character2.defense} PM: {character2.mp} Attack: {character2.attack}</span>
                     <img width={"10%"} src={imgCharacter2} alt="" />
                     <span>{character2.name}</span>
+                    <img width={"10%"} src={imgCharacter2} alt="" />
+                    <span> hp: {character2.hp} &nbsp; defense: {character2.defense} PM: {character2.mp}</span>
                     <div className="content-spell">
                         {character2.spells.map((spell) => {
                             return (
