@@ -7,7 +7,8 @@ import { characters } from "../data/characters"
 
 const FightScene = () => {
 
-    const { player1, player2 } = useParams()
+    const { player1, player2, map } = useParams()
+    console.log(map)
     const findPlayer1: CharacterInterface = characters.find((element) => element.name == player1)!
     const findPLayer2: CharacterInterface = characters.find((element) => element.name == player2)!
 

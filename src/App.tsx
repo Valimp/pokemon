@@ -10,7 +10,7 @@ function App() {
   return (
     <Routes>
       <Route path="/Characters" element={<Characters />} />
-      <Route path="/FightScene/:player1/:player2" element={<FightScene />} />
+      <Route path="/FightScene/:player1/:player2/:map" element={<FightScene />} />
       <Route path="/home" element={<Home />} />
       <Route path="/maps" element={<HomeMap />} />
       <Route path="/accueil" element={<Accueil />} />

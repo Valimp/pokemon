@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 interface StartFightButtonProps {
     player1: string
     player2: string
+    map: string
 }
 
-const StartFightButton = ({ player1, player2 }: StartFightButtonProps) => {
+const StartFightButton = ({ player1, player2, map }: StartFightButtonProps) => {
 
     return (
-        <Link to={`/FightScene/${player1}/${player2}`} >
+        <Link to={`/FightScene/${player1}/${player2}/${map}`} >
             Start Fight
         </Link>
     )

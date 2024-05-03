@@ -1,4 +1,9 @@
 @import "./components/map.scss";
 @import "./components/startbutton.scss";
+@import "./accueil.scss";
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap');
 
+body{
+    padding: 0;
+    margin: 0;
+}
