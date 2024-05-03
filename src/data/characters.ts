@@ -1,7 +1,8 @@
-import { passives } from "./passive"
 import { spells } from "./spells"
-import imgCharacter from '../assets/characters/perso.jpg'
-import imgCharacter2 from '../assets/characters/letamaca-pose-monsieur-epee.jpg'
+import imgPouis from '../assets/characters/2004-Shiny-Charmander.webp'
+import imgPeonard from '../assets/characters/1528080679Pokemon-PNG-HD.png'
+import imgPyllian from '../assets/characters/purepng.com-pokemonpokemonpocket-monsterspokemon-franchisefictional-speciesone-pokemonmany-pokemonone-pikachu-1701527786846qmowo.png'
+import imgPulien from '../assets/characters/Mew-Pokemon-PNG-File.png'
 import { CharacterInterface } from "../interfaces/Character"
 
 const characters: Array<CharacterInterface> = [
@@ -9,7 +10,7 @@ const characters: Array<CharacterInterface> = [
         name: "Pouis",
         hp: 125,
         mp: 5,
-        image: imgCharacter,
+        image: imgPouis,
         attack: 50,
         defense: 20,
         spells: [spells[0].charge, spells[0].coupe, spells[0].bouleFeu]
@@ -18,7 +19,7 @@ const characters: Array<CharacterInterface> = [
         name: "Péonard",
         hp: 150,
         mp: 6,
-        image: imgCharacter2,
+        image: imgPeonard,
         attack: 100,
         defense: 10,
         spells: [spells[0].frappeDestructrice, spells[0].pickGlace, spells[0].tsunami]
@@ -27,7 +28,7 @@ const characters: Array<CharacterInterface> = [
         name: "Pyllian",
         hp: 100,
         mp: 8,
-        image: imgCharacter,
+        image: imgPyllian,
         attack: 50,
         defense: 35,
         spells: [spells[0].toucherMortelle, spells[0].folieMeurtriere, spells[0].deflagration]
@@ -36,7 +37,7 @@ const characters: Array<CharacterInterface> = [
         name: "Pulien",
         hp: 200,
         mp: 6,
-        image: imgCharacter2,
+        image: imgPulien,
         attack: 50,
         defense: 70,
         spells: [spells[0].bouleRoc, spells[0].cataclysme, spells[0].chatiment]
