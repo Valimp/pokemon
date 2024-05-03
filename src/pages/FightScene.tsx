@@ -112,16 +112,16 @@ const FightScene = () => {
         }))
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-            if ('name' in round.playerActuallyPlayed && round.playerActuallyPlayed.name == character1.name) {
-                skip(character2)
-            }
-            if ('name' in round.playerActuallyPlayed && round.playerActuallyPlayed.name == character2.name) {
-                skip(character1)
-            }
-        }, 30000)
-    }, [round])
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         if ('name' in round.playerActuallyPlayed && round.playerActuallyPlayed.name == character1.name) {
+    //             skip(character2)
+    //         }
+    //         if ('name' in round.playerActuallyPlayed && round.playerActuallyPlayed.name == character2.name) {
+    //             skip(character1)
+    //         }
+    //     }, 30000)
+    // }, [round])
 
     useEffect(() => {
         if (character1.mp <= 0) {
