@@ -9,15 +9,9 @@
 }
 
 body {
-        font-family: Game;
-        font-size: 0.8em;   
-        color:white;
-        background-color: #01060D;
-        background-image:url(../../assets/maps/arena.jpg) ;
-		background-position: 25% 75%;
-		background-size: 150%;
-		background-position: center;
-		background-repeat: no-repeat;
+    font-family: Game;
+    font-size: 0.8em;   
+    color:white;
 }
 .map {
     width:10vw;
@@ -30,9 +24,15 @@ body {
         border: solid 4px red;
         transform: scale(1.1)
     }
-
+    
 }
 
+.selected{
+    width:11vw;
+    height:18vh;
+    border: solid 4px red;
+    transform: scale(1.1)
+}
 h2 {
     text-align: center;
 }

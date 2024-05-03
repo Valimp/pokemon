@@ -1,5 +1,4 @@
 import { CharacterInterface } from "../interfaces/Character"
-import { Passive } from "../interfaces/Passive"
 import { Spell } from "../interfaces/Spell"
 import imgCharacter from '../assets/characters/perso.jpg'
 import imgCharacter2 from '../assets/characters/letamaca-pose-monsieur-epee.jpg'
@@ -10,7 +9,8 @@ import { characters } from "../data/characters"
 
 const FightScene = () => {
 
-    const { player1, player2 } = useParams()
+    const { player1, player2, map } = useParams()
+    console.log(map)
     const findPlayer1: CharacterInterface = characters.find((element) => element.name == player1)!
     const findPLayer2: CharacterInterface = characters.find((element) => element.name == player2)!
 

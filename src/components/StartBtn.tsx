@@ -1,39 +1,39 @@
 import startbtn from '../assets/maps/startbtn.mp3';
 import "../styles/components/startbutton.scss";
-
+import { Link } from 'react-router-dom';
 
 interface StartBtnProps {
-    titre: string
+  titre: string
 }
 
 const StartBtn = ({ titre }: StartBtnProps) => {
-  const sound = new Audio(startbtn); 
+  const sound = new Audio(startbtn);
   const playSound = () => {
     sound.volume = 0.5;
-    sound.play(); 
+    sound.play();
   };
 
   const stopSound = () => {
     sound.pause();
     sound.currentTime = 0;
   };
-  
+
   return (
-    <div>
-      <button 
-        className="start-btn"  
+    <Link className='buttonStart' to={"/home"}>
+      <button
+        className="start-btn"
         onMouseEnter={(e) => {
           playSound();
-          e.currentTarget.classList.add('hovered'); 
+          e.currentTarget.classList.add('hovered');
         }}
         onMouseLeave={(e) => {
           stopSound();
-          e.currentTarget.classList.remove('hovered'); 
+          e.currentTarget.classList.remove('hovered');
         }}
       >
         {titre}
       </button>
-    </div>
+    </Link>
   );
 };
 

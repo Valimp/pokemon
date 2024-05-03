@@ -6,8 +6,9 @@ import { characters } from "../data/characters"
 import Map from '../components/Map';
 import Bamboo from "../assets/maps/bamboobridge.png";
 import NewCastle from "../assets/maps/castlebridge.png";
-import Forest from "../assets/maps/forest bridge.png";
-import Sky from "../assets/maps/sky bridge.png";
+import Forest from "../assets/maps/forest_bridge.png";
+import Sky from "../assets/maps/sky_bridge.png";
+import '../styles/pages/home.scss'
 
 
 const Home = () => {
@@ -21,8 +22,8 @@ const Home = () => {
     console.log(initCombat);
 
     return (
-        <div>
-            <h1>Home</h1>
+        <div className="main-container-selecteur">
+            <h1 className="title-select-hero">Select Your Hero</h1>
             <div className="charactersChoice">
                 <div className="redRectangle"></div>
                 {
@@ -54,28 +55,37 @@ const Home = () => {
                 }
             </div>
 
+            <h1>Select Your Map</h1>
             <div className="container-maps">
                 <Map
                     imageSource={Bamboo}
                     titre="Bamboom"
+                    setInitCombat={setInitCombat}
+                    initCombat={initCombat}
                 />
                 <Map
                     imageSource={NewCastle}
                     titre="New Castle"
+                    setInitCombat={setInitCombat}
+                    initCombat={initCombat}
                 />
                 <Map
                     imageSource={Forest}
                     titre="Foresty"
+                    setInitCombat={setInitCombat}
+                    initCombat={initCombat}
                 />
                 <Map
                     imageSource={Sky}
                     titre="Sky Art"
+                    setInitCombat={setInitCombat}
+                    initCombat={initCombat}
                 />
             </div>
             <div>
-                Vous avez choisi {initCombat.joueur1} contre {initCombat.joueur2}
+                Vous avez choisi {initCombat.joueur1} contre {initCombat.joueur2} et la map { }
             </div>
-            <StartFightButton player1={initCombat.joueur1} player2={initCombat.joueur2} />
+            <StartFightButton player1={initCombat.joueur1} player2={initCombat.joueur2} map={initCombat.map} />
         </div>
     )
 }
