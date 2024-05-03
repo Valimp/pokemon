@@ -3,6 +3,8 @@ import { useState } from "react"
 import Pickachu from "../assets/sprites/pikachu.png"
 import '../styles/components/App.scss'
 import StartFightButton from "../components/StartFightButton"
+import characters from "../data/characters"
+
 
 const Home = () => {
 
@@ -19,23 +21,33 @@ const Home = () => {
         <h1>Home</h1>
         <div className="charactersChoice">
             <div className="redRectangle"></div>
-            <CharactersButton 
-                name='pikachu' 
-                image={Pickachu} 
-                setInitCombat={setInitCombat}
-                initCombat={initCombat} 
-                player="1"
-            />
+            {
+                characters.map((character) => (
+                    <CharactersButton 
+                        key={character.name} 
+                        name={character.name} 
+                        image={character.image} 
+                        setInitCombat={setInitCombat}
+                        initCombat={initCombat} 
+                        player="1"
+                    />
+                ))
+            }
         </div>
         <div className="charactersChoice">
             <div className="blueRectangle"></div>
-            <CharactersButton 
-                name='pikachu' 
-                image={Pickachu} 
-                setInitCombat={setInitCombat}
-                initCombat={initCombat} 
-                player="2"
-            />
+            {
+                characters.map((character) => (
+                    <CharactersButton 
+                        key={character.name} 
+                        name={character.name} 
+                        image={character.image} 
+                        setInitCombat={setInitCombat}
+                        initCombat={initCombat} 
+                        player="2"
+                    />
+                ))
+            }
         </div>
         <div>
             Vous avez choisi {initCombat.joueur1} contre {initCombat.joueur2}
@@ -44,5 +56,6 @@ const Home = () => {
     </div>
   )
 }
+
 
 export default Home
