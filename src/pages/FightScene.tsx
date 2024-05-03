@@ -5,63 +5,57 @@ import { Spell } from "../interfaces/Spell"
 import imgCharacter from '../assets/characters/perso.jpg'
 import imgCharacter2 from '../assets/characters/letamaca-pose-monsieur-epee.jpg'
 import '../styles/fightScene.scss'
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 
-const lazyEffect = (): void => {
-}
-
-const pouisPass: Passive = {
-    name: "Fégnant",
-    desc: "Pouis quand il est motivé boost ses attaques pendant 2 tours, et se repose au troisieme tours",
-    effect: lazyEffect
-}
-
-const peonardPass: Passive = {
-    name: "Ombre et Lumière",
-    desc: "Un tour sur deux Péonard échange ses stats attaque et defense",
-    effect: lazyEffect
-}
-
-const charge: Spell = {
-    name: "charge",
-    damage: 15,
-    cost: 1,
-    image: "youtube.com"
-}
-
-const coupe: Spell = {
-    name: "coupe",
-    damage: 20,
-    cost: 2,
-    image: "youtube.com"
-}
-
-const pouis: CharacterInterface = {
-    name: "Pouis",
-    hp: 125,
-    mp: 5,
-    image: "youtube.com",
-    attack: 50,
-    defense: 20,
-    passif: pouisPass,
-    spells: [charge, coupe]
-}
-
-const peonard: CharacterInterface = {
-    name: "Péonard",
-    hp: 150,
-    mp: 6,
-    image: "youtube.com",
-    attack: 100,
-    defense: 10,
-    passif: peonardPass,
-    spells: [charge, coupe]
-}
 
 const FightScene = () => {
-    const maxPm = 9
-    const recoveryPm = 2
+
+    const charge: Spell = {
+        name: "charge",
+        damage: 15,
+        cost: 9,
+        image: "youtube.com"
+    }
+
+    const heal: Spell = {
+        name: 'heal',
+        damage: 0,
+        cost: 2,
+        image: "dddd",
+        spellEffect: (character: CharacterInterface): void => {
+            character.hp = character.hp + 10
+        }
+    }
+
+    const coupe: Spell = {
+        name: "coupe",
+        damage: 20,
+        cost: 2,
+        image: "youtube.com"
+    }
+
+    const pouis: CharacterInterface = {
+        name: "Pouis",
+        hp: 125,
+        mp: 5,
+        image: "youtube.com",
+        attack: 50,
+        defense: 20,
+        spells: [charge, coupe, heal]
+    }
+
+    const peonard: CharacterInterface = {
+        name: "Péonard",
+        hp: 150,
+        mp: 6,
+        image: "youtube.com",
+        attack: 100,
+        defense: 10,
+        spells: [charge, coupe, heal]
+    }
+
+    const recoveryPm = 4
 
     const [character1, setCharacter1] = useState<CharacterInterface>(peonard)
     const [character2, setCharacter2] = useState<CharacterInterface>(pouis)
@@ -119,6 +113,17 @@ const FightScene = () => {
     }
 
     useEffect(() => {
+        setTimeout(() => {
+            if ('name' in round.playerActuallyPlayed && round.playerActuallyPlayed.name == character1.name) {
+                skip(character2)
+            }
+            if ('name' in round.playerActuallyPlayed && round.playerActuallyPlayed.name == character2.name) {
+                skip(character1)
+            }
+        }, 30000)
+    }, [round])
+
+    useEffect(() => {
         if (character1.mp <= 0) {
             const buttonSpells1 = document.querySelectorAll<HTMLButtonElement>('.button-spell-character1')
             for (const button of buttonSpells1) {
@@ -151,6 +156,19 @@ const FightScene = () => {
 
     }, [character1.mp, character2.mp])
 
+
+    const reduceDamage = (spellDamage: number, defense: number): number => {
+        const percentage = 1 - (defense / 100)
+        const damagereduce = spellDamage * percentage
+        return Math.ceil(damagereduce)
+    }
+
+    const spellEffect = (spell: Spell, character: CharacterInterface): void => {
+        if ('spellEffect' in spell && typeof spell.spellEffect === 'function') {
+            spell.spellEffect(character)
+        }
+    }
+
     return (
         <div className="fightScene">
             <div className="content">
@@ -163,16 +181,17 @@ const FightScene = () => {
                             return (
                                 <>
                                     <button id={`spell-${character1.name}-${spell.name}`} className="button-spell-character1" disabled={disabled1} onClick={() => {
-                                        setCharacter2(prevStat => ({
-                                            ...prevStat,
-                                            hp: prevStat.hp - spell.damage
-
-                                        }))
-
+                                        spellEffect(spell, character1)
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
                                             mp: prevStat.mp - spell.cost
                                         }))
+                                        setCharacter2(prevStat => ({
+                                            ...prevStat,
+                                            hp: prevStat.hp - reduceDamage(spell.damage, character2.defense)
+
+                                        }))
+
 
                                     }}  >{spell.name}</button>
                                 </>
@@ -193,9 +212,10 @@ const FightScene = () => {
                             return (
                                 <>
                                     <button className="button-spell-character2" id={`spell-${character2.name}-${spell.name}`} disabled={disabled2} onClick={() => {
+                                        spellEffect(spell, character2)
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
-                                            hp: prevStat.hp - spell.damage,
+                                            hp: prevStat.hp - reduceDamage(spell.damage, character1.defense),
                                         }))
 
                                         setCharacter2(prevStat => ({
