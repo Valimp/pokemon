@@ -59,9 +59,6 @@ const peonard: CharacterInterface = {
     spells: [charge, coupe]
 }
 
-
-
-
 const FightScene = () => {
     const maxPm = 9
     const recoveryPm = 2
@@ -121,18 +118,51 @@ const FightScene = () => {
         }))
     }
 
+    useEffect(() => {
+        if (character1.mp <= 0) {
+            const buttonSpells1 = document.querySelectorAll<HTMLButtonElement>('.button-spell-character1')
+            for (const button of buttonSpells1) {
+                button.disabled = true
+            }
+        }
+        if (character2.mp <= 0) {
+            const buttonSpells2 = document.querySelectorAll<HTMLButtonElement>('.button-spell-character2')
+            for (const button of buttonSpells2) {
+                button.disabled = true
+            }
+        }
+        character1.spells.map((spell) => {
+            if (spell.cost > character1.mp) {
+                const button = document.querySelector<HTMLButtonElement>(`#spell-${character1.name}-${spell.name}`)
+                if (button) {
+                    button.disabled = true
+                }
+            }
+        })
+        character2.spells.map((spell) => {
+            if (spell.cost > character2.mp) {
+                const button = document.querySelector<HTMLButtonElement>(`#spell-${character2.name}-${spell.name}`)
+                if (button) {
+                    button.disabled = true
+                }
+            }
+        })
+
+
+    }, [character1.mp, character2.mp])
+
     return (
         <div className="fightScene">
             <div className="content">
                 <div className="perso1">
-                    <span> hp: {character1.hp} &nbsp; defense: {character1.defense} PM: {character1.mp} </span>
+                    <span> hp: {character1.hp} &nbsp; defense: {character1.defense} PM: {character1.mp} Attack: {character1.attack}  </span>
                     <img width={"10%"} src={imgCharacter} alt="" />
                     <span>{character1.name}</span>
                     <div className="content-spell">
                         {character1.spells.map((spell) => {
                             return (
                                 <>
-                                    <button disabled={disabled1} onClick={() => {
+                                    <button id={`spell-${character1.name}-${spell.name}`} className="button-spell-character1" disabled={disabled1} onClick={() => {
                                         setCharacter2(prevStat => ({
                                             ...prevStat,
                                             hp: prevStat.hp - spell.damage
@@ -155,14 +185,14 @@ const FightScene = () => {
                 </div>
 
                 <div className="perso2">
-                    <span> hp: {character2.hp} &nbsp; defense: {character2.defense} PM: {character2.mp}</span>
+                    <span> hp: {character2.hp} &nbsp; defense: {character2.defense} PM: {character2.mp} Attack: {character2.attack}</span>
                     <img width={"10%"} src={imgCharacter2} alt="" />
                     <span>{character2.name}</span>
                     <div className="content-spell">
                         {character2.spells.map((spell) => {
                             return (
                                 <>
-                                    <button disabled={disabled2} onClick={() => {
+                                    <button className="button-spell-character2" id={`spell-${character2.name}-${spell.name}`} disabled={disabled2} onClick={() => {
                                         setCharacter1(prevStat => ({
                                             ...prevStat,
                                             hp: prevStat.hp - spell.damage,

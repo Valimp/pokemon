@@ -1,5 +1,3 @@
-import { CharacterInterface } from "./Character"
-
 export interface Spell {
     name: string,
     damage: number,
